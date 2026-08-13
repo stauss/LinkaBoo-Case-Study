@@ -49,7 +49,11 @@ The primary interaction lives where Mac users already work: Finder and the menu 
 
 There is intentionally no “uploading to LinkaBoo” step. If a direct connection cannot be completed, the product should explain the failure instead of silently routing the file through paid relay infrastructure.
 
-![Compact interaction study showing the notch as a drag target](docs/portfolio/interaction-study.png)
+[![Compact LinkaBoo interaction prototype showing Boo inside a notch-style drag target](docs/portfolio/compact-interaction-poster.png)](docs/portfolio/compact-interaction.mp4)
+
+**[Watch the compact interaction prototype (MP4, 10 seconds)](docs/portfolio/compact-interaction.mp4)**
+
+This early motion prototype tests how Boo can turn a passive screen edge into an inviting drag target: the character notices the cursor, presents a document, accepts the drop, and carries the file into the transfer flow. Its “Upload Documents” label captures an earlier stage of the concept. As the architecture became direct-only, the product language evolved toward **send** and **transfer** so the interface would not imply that LinkaBoo stores the file in the cloud.
 
 ## Designing Boo as part of the interface
 
@@ -87,7 +91,7 @@ Character explorations tested facial expressions, arms, shadows, and file props 
 
 ### 4. Prototype visible transfer feedback
 
-Notch and corner treatments explored where a live transfer could remain glanceable without interrupting work. Progress, link-copied, success, and error states were designed as a family rather than isolated notifications.
+Notch and corner treatments explored where a live transfer could remain glanceable without interrupting work. Progress, link-copied, success, and error states were designed as a family rather than isolated notifications. The revised board also compares the larger notch treatment with a compact corner “blip,” making the tradeoff between visibility and interruption explicit.
 
 ![Notch UI concepts for download, progress, link copied, and success states](docs/portfolio/notch-ui.png)
 
@@ -103,15 +107,15 @@ Building the real app exposed questions that static mockups could not: how long 
 
 ![Notification illustration set for sharing files and folders](docs/portfolio/notification-illustrations.png)
 
-The notification illustrations extend the same state language into moments when the popover is closed. They are intentionally more expressive than the smallest toolbar icons while preserving Boo's core silhouette.
+The notification illustrations extend the same state language into moments when the popover is closed. They are intentionally more expressive than the smallest toolbar icons while preserving Boo's core silhouette. Boo can celebrate, carry the transfer, or frame familiar file and folder objects without asking the user to learn a new visual vocabulary.
 
-Motion studies focused on hovering, anticipation, carrying, and delivery. The goal is not animation for its own sake; movement should confirm that a file has been accepted, indicate activity during an uncertain network step, or make completion feel clear.
+Motion studies focused on hovering, anticipation, carrying, and delivery. The goal is not animation for its own sake; movement should confirm that a file has been accepted, indicate activity during an uncertain network step, or make completion feel clear. The compact UI prototype above explores interaction choreography; the character animation below explores personality and physicality at a larger scale.
 
-![Boo motion and rendering study on a dark background](docs/portfolio/motion-study.png)
+[![AI-assisted Boo animation showing the character receiving and carrying files](docs/portfolio/ai-motion-experiment-poster.png)](docs/portfolio/ai-motion-experiment.mp4)
 
-![Alternative AI-assisted motion exploration](docs/portfolio/ai-motion-experiment.png)
+**[Watch the AI-assisted character animation (MP4, 10 seconds)](docs/portfolio/ai-motion-experiment.mp4)**
 
-The AI-assisted exploration was used as a divergent concept study, then compared with the flatter system used in the product. It helped test personality and dimensionality quickly, while the final interface direction stayed simpler and more legible at native UI sizes.
+The AI-assisted exploration was used as a divergent concept study rather than production UI. It helped test how Boo might notice, catch, carry, and release file objects with weight and personality. Those ideas can inform hand-authored motion, while the shipping interface remains flatter, more controlled, and more legible at native UI sizes.
 
 ## Technical architecture
 
