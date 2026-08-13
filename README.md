@@ -24,7 +24,7 @@ This repository is both a working MVP and a product case study: it documents the
 
 ## Why I started building LinkaBoo
 
-LinkaBoo came from a small frustration I kept running into: I wanted to give someone a file, but first I had to put that file somewhere else.
+LinkaBoo came from a small frustration I kept running into. I wanted to give someone a file or folder, but first I had to upload it somewhere else. Wait for the upload, copy a link, paste it into email or Slack, then wait for the other person to download it so I could clear the larger files out of paid storage. Every step added distance between me and the person I was sending to. The process was broken and over-engineered for what should have been a simple handoff.
 
 The familiar flow was to open a cloud drive or transfer service, choose the file, wait for it to upload, create a share link, check its permissions, send the link, and leave another hosted copy behind. That workflow makes sense for files that need to remain available asynchronously. It felt unnecessarily indirect for a live exchange where both people were already present.
 
