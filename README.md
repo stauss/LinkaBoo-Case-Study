@@ -16,25 +16,61 @@ This repository is both a working MVP and a product case study: it documents the
 | --- | --- |
 | **Platform** | macOS 12+ |
 | **Product shape** | Native menu bar app + Finder extension + web install/open handoff |
-| **Transfer model** | Encrypted peer-to-peer, app to app |
+| **Transfer model** | App-to-app product experience with a direct, encrypted P2P data path |
 | **Infrastructure stance** | Coordination only; no payload storage and no hidden relay in the MVP |
 | **Core technologies** | Swift, AppKit, SwiftUI, Go, Magic Wormhole protocol, XcodeGen |
+| **Long-term direction** | Trusted contacts, automatic device-to-device delivery, and opt-in folder sharing/sync |
 | **My focus** | Product direction, concept, brand identity, illustration, UX/UI, prototyping, and product documentation |
 | **Engineering collaborator** | [Aaron Price](https://github.com/aaronprice00) — engineering partnership across the Go transfer layer and native macOS implementation |
 
-## The opportunity
+## Why I started building LinkaBoo
 
-Most file-sharing products quietly turn a simple person-to-person exchange into a storage workflow: upload a file, wait for a server, generate a hosted download, and make the receiver trust another cloud destination.
+LinkaBoo came from a small frustration I kept running into: I wanted to give someone a file, but first I had to put that file somewhere else.
+
+The familiar flow was to open a cloud drive or transfer service, choose the file, wait for it to upload, create a share link, check its permissions, send the link, and leave another hosted copy behind. That workflow makes sense for files that need to remain available asynchronously. It felt unnecessarily indirect for a live exchange where both people were already present.
+
+What should have felt like **“send this file to that person”** had become **“upload this file to a third party so that person can download it again.”** The extra copy creates waiting, permission questions, cleanup, storage, and another service that has to sit between the sender and recipient.
 
 LinkaBoo started with a narrower question:
 
 > What if sharing a file on a Mac felt immediate and personal, while the product stayed out of the path of the file itself?
+
+The goal is not to replace cloud storage. It is to create a better tool for the moment when storage is not the job: both people are available, the sender still has the original, and the file only needs to travel from one device to another.
 
 That question led to three product constraints that shaped everything else:
 
 1. **Keep the sender flow short.** Drag a file onto Boo, get a link, share it.
 2. **Make the transfer model honest.** Both native apps participate in a live transfer; the browser is a handoff, not a disguised download client.
 3. **Protect privacy and the business model together.** If LinkaBoo never stores or relays payload bytes, infrastructure remains small and users keep control of their data.
+
+## P2P and app-to-app are not the same thing
+
+LinkaBoo uses both terms because they describe different parts of the product.
+
+| | **What it describes** | **What it means in LinkaBoo** |
+| --- | --- | --- |
+| **Peer-to-peer (P2P)** | The network path used by the file data | After coordination, the sender and receiver attempt a direct encrypted connection. File bytes move between their devices instead of being uploaded to LinkaBoo storage. |
+| **App-to-app** | The product boundary at each endpoint | Both participants use the native LinkaBoo app. The browser link opens the app or explains how to install it; the browser is not a download client in the MVP. |
+
+P2P answers **“where do the bytes travel?”** App-to-app answers **“what software participates?”** A product can be app-to-app while still relaying every byte through its own servers, and a browser can participate in some forms of P2P. LinkaBoo deliberately combines a native app at both ends with a direct device-to-device data path.
+
+Requiring the native app is a product decision, not a technical accident. It gives LinkaBoo a reliable place to work with local files and folders, maintain a live transfer, integrate with Finder and the menu bar, show system-level progress, and attempt the direct TCP connection used by the current engine. The web page can stay small and honest: it coordinates the handoff, but it does not pretend that a file has been uploaded and is waiting there.
+
+## Beyond the MVP
+
+The current MVP is intentionally focused on proving the smallest complete behavior: one person chooses a file, another person joins the live session, and the two native apps complete a direct transfer. The link and one-time code are useful starting points, but they are not the full product vision.
+
+The longer-term opportunity is to make LinkaBoo a trusted transfer layer between people and machines:
+
+- **Trusted contacts:** pair with people or devices once, then choose a known recipient instead of creating and manually sending a new link every time.
+- **Automatic delivery:** queue a transfer locally and begin it when the trusted recipient comes online, with clear sender approval, recipient controls, and visible status at both ends.
+- **Device-to-device workflows:** move files between a person's own Macs as naturally as sending to another contact.
+- **Shared folders:** opt specific folders into direct sharing or synchronization between trusted machines.
+- **Ongoing sync:** watch for changes, transfer only what is needed, and surface conflicts, history, and failures instead of hiding them.
+
+Those capabilities would require durable device identity, contact and permission models, presence, reconnect behavior, change detection, conflict resolution, and careful recovery. They would extend the coordination layer, but they do not have to change the central file-ownership rule.
+
+In the intended model, “automatic” does not mean uploading files to LinkaBoo while the other person is offline. The sender retains the pending data locally; transfer begins when authorized devices are available to connect. Likewise, a shared folder is a relationship between participant machines, not a new cloud drive hosted by LinkaBoo. If future reliability requirements ever call for stored or relayed payloads, that would be evaluated and communicated as a separate product and business-model decision.
 
 ## The experience
 
@@ -49,9 +85,9 @@ The primary interaction lives where Mac users already work: Finder and the menu 
 
 There is intentionally no “uploading to LinkaBoo” step. If a direct connection cannot be completed, the product should explain the failure instead of silently routing the file through paid relay infrastructure.
 
-[![Compact LinkaBoo interaction prototype showing Boo inside a notch-style drag target](docs/portfolio/compact-interaction-poster.png)](docs/portfolio/compact-interaction.mp4)
+[![Animated compact LinkaBoo interaction showing Boo inside a notch-style drag target](docs/portfolio/compact-interaction.gif)](docs/portfolio/compact-interaction.mp4)
 
-**[Watch the compact interaction prototype (MP4, 10 seconds)](docs/portfolio/compact-interaction.mp4)**
+*Animation plays inline. [Open the higher-quality MP4 (10 seconds).](docs/portfolio/compact-interaction.mp4)*
 
 This early motion prototype tests how Boo can turn a passive screen edge into an inviting drag target: the character notices the cursor, presents a document, accepts the drop, and carries the file into the transfer flow. Its “Upload Documents” label captures an earlier stage of the concept. As the architecture became direct-only, the product language evolved toward **send** and **transfer** so the interface would not imply that LinkaBoo stores the file in the cloud.
 
@@ -111,15 +147,46 @@ The notification illustrations extend the same state language into moments when 
 
 Motion studies focused on hovering, anticipation, carrying, and delivery. The goal is not animation for its own sake; movement should confirm that a file has been accepted, indicate activity during an uncertain network step, or make completion feel clear. The compact UI prototype above explores interaction choreography; the character animation below explores personality and physicality at a larger scale.
 
-[![AI-assisted Boo animation showing the character receiving and carrying files](docs/portfolio/ai-motion-experiment-poster.png)](docs/portfolio/ai-motion-experiment.mp4)
+[![Animated AI-assisted Boo study showing the character receiving and carrying files](docs/portfolio/ai-motion-experiment.gif)](docs/portfolio/ai-motion-experiment.mp4)
 
-**[Watch the AI-assisted character animation (MP4, 10 seconds)](docs/portfolio/ai-motion-experiment.mp4)**
+*Animation plays inline. [Open the higher-quality MP4 (10 seconds).](docs/portfolio/ai-motion-experiment.mp4)*
 
 The AI-assisted exploration was used as a divergent concept study rather than production UI. It helped test how Boo might notice, catch, carry, and release file objects with weight and personality. Those ideas can inform hand-authored motion, while the shipping interface remains flatter, more controlled, and more legible at native UI sizes.
 
 ## Technical architecture
 
 LinkaBoo separates product responsibilities so that convenience features cannot accidentally turn the service into a file host.
+
+### Why Magic Wormhole
+
+The transfer engine is built in Go on [`wormhole-william`](https://github.com/psanford/wormhole-william), an implementation of the open [Magic Wormhole](https://github.com/magic-wormhole/magic-wormhole) protocol. Magic Wormhole was a useful starting point because it already solves the difficult introduction problem: how two devices can use a short, single-use code to find one another and establish shared cryptographic keys without asking a person to exchange a long key or create an account.
+
+At a high level, the flow is:
+
+1. The sender creates a short, one-time Wormhole code.
+2. Both apps connect to the same mailbox—historically called the rendezvous server—and use the code to enter the same session.
+3. The clients perform a password-authenticated key exchange (PAKE, using SPAKE2 in Magic Wormhole) to establish a shared secret. The short code is part of a cryptographic exchange; it is not simply a public file identifier.
+4. Over that encrypted control channel, the apps exchange connection “hints” that describe ways to reach each other.
+5. The transit layer attempts to establish a direct TCP connection between the two devices.
+6. When that succeeds, file data crosses the encrypted connection directly from the sender app to the receiver app.
+
+The mailbox helps the peers meet, but it is not the file path. Magic Wormhole's own documentation separates these responsibilities into a [mailbox protocol](https://magic-wormhole.readthedocs.io/en/latest/ecosystem.html) for the initial exchange and a [transit protocol](https://magic-wormhole.readthedocs.io/en/latest/transit.html) for the encrypted data stream.
+
+This foundation fit LinkaBoo for several reasons:
+
+- short one-time codes support a share-link experience without requiring accounts
+- PAKE turns a human-sized code into an authenticated encrypted session
+- the coordination channel and bulk-data channel are separate
+- the protocol already supports file and directory transfer semantics
+- using an established open protocol avoids inventing custom cryptography for the MVP
+
+### The direct-only difference
+
+Standard Magic Wormhole is **direct-preferred**, not strictly direct-only. Its transit protocol normally tries a direct connection first and can fall back to a transit relay when network conditions prevent the peers from reaching each other. The relay still carries encrypted data, but it carries the data nonetheless.
+
+LinkaBoo makes a narrower MVP choice. Direct-only mode is the default, the Go client removes the default transit relay address, and production configuration requires an explicit rendezvous URL. If the peers cannot establish a direct path, LinkaBoo reports the failure instead of silently putting the file onto relay infrastructure.
+
+That decision has a real tradeoff: some transfers will fail on restrictive networks that a relayed product could support. For this phase, that honest limitation protects the original idea—no hosted copy, no payload bandwidth bill, and no gradual drift from a lightweight coordination service into a storage or delivery platform. Relay support would be a business-model decision, not a hidden reliability patch.
 
 ```mermaid
 flowchart LR
@@ -144,12 +211,12 @@ flowchart LR
 
 ### Local Go engine
 
-- wraps the Wormhole-style encrypted transfer experiment
+- wraps `wormhole-william` and the Magic Wormhole file-transfer flow
 - creates and joins one-time transfer codes
 - handles files and directories
 - emits structured JSON progress and error events to the native app
 - supports cancellation and configurable destinations
-- defaults to a direct-only transport stance
+- defaults to direct-only transit by clearing relay configuration
 
 ### Coordination and web layers
 
