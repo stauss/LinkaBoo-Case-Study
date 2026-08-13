@@ -1,0 +1,86 @@
+version: '3'
+
+vars:
+  BINARY: linkaboo
+  BUILD_DIR: build
+
+tasks:
+  default:
+    desc: Show available tasks
+    cmds: [task --list]
+
+  go:build:
+    desc: Build the Go CLI binary
+    cmds:
+      - mkdir -p {{.BUILD_DIR}}
+      - go build -o {{.BUILD_DIR}}/{{.BINARY}} ./cmd/linkaboo
+    sources:
+      - cmd/**/*.go
+      - internal/**/*.go
+      - go.mod
+      - go.sum
+
+  go:test:
+    desc: Run Go tests
+    cmds:
+      - go test ./...
+
+  go:build:universal:
+    desc: Build universal macOS binary (amd64 + arm64)
+    cmds:
+      - mkdir -p {{.BUILD_DIR}}
+      - GOOS=darwin GOARCH=amd64 go build -o {{.BUILD_DIR}}/{{.BINARY}}-amd64 ./cmd/linkaboo
+      - GOOS=darwin GOARCH=arm64 go build -o {{.BUILD_DIR}}/{{.BINARY}}-arm64 ./cmd/linkaboo
+      - lipo -create -output {{.BUILD_DIR}}/{{.BINARY}} {{.BUILD_DIR}}/{{.BINARY}}-amd64 {{.BUILD_DIR}}/{{.BINARY}}-arm64
+      - rm {{.BUILD_DIR}}/{{.BINARY}}-amd64 {{.BUILD_DIR}}/{{.BINARY}}-arm64
+
+  swift:generate:
+    desc: Generate Xcode project from project.yml
+    dir: macos
+    cmds:
+      - xcodegen generate
+
+  swift:build:
+    desc: Build the macOS app
+    dir: macos
+    deps: [go:build, swift:generate]
+    cmds:
+      - xcodebuild -project LinkaBoo.xcodeproj -scheme LinkaBoo -configuration Debug build
+
+  swift:run:
+    desc: Build and run the macOS app
+    dir: macos
+    deps: [swift:build]
+    cmds:
+      - open $(xcodebuild -project LinkaBoo.xcodeproj -scheme LinkaBoo -configuration Debug -showBuildSettings 2>/dev/null | grep -m1 BUILT_PRODUCTS_DIR | awk '{print $3}')/LinkaBoo.app
+
+  swift:build:release:
+    desc: Build Release macOS app (universal, for distribution to other machines)
+    dir: macos
+    deps: [go:build:universal, swift:generate]
+    cmds:
+      - xcodebuild -project LinkaBoo.xcodeproj -scheme LinkaBoo -configuration Release -derivedDataPath build-release ARCHS="arm64 x86_64" ONLY_ACTIVE_ARCH=NO clean build
+
+  swift:package:
+    desc: Zip the Release build into dist/LinkaBoo.zip for transfer
+    deps: [swift:build:release]
+    cmds:
+      - mkdir -p dist
+      - rm -f dist/LinkaBoo.zip
+      - ditto -c -k --sequesterRsrc --keepParent macos/build-release/Build/Products/Release/LinkaBoo.app dist/LinkaBoo.zip
+      - echo "Packaged dist/LinkaBoo.zip"
+      - ls -lh dist/LinkaBoo.zip
+
+  web:dev:
+    desc: Serve the landing page locally
+    dir: web
+    cmds:
+      - npx serve .
+
+  clean:
+    desc: Clean build artifacts
+    cmds:
+      - rm -rf {{.BUILD_DIR}}
+      - rm -rf macos/LinkaBoo.xcodeproj
+      - rm -rf macos/build-release
+      - rm -rf dist
