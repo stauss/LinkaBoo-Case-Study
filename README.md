@@ -20,7 +20,6 @@ This repository is both a working MVP and a product case study: it documents the
 | **Infrastructure stance** | Coordination only; no payload storage and no hidden relay in the MVP |
 | **Core technologies** | Swift, AppKit, SwiftUI, Go, Magic Wormhole protocol, XcodeGen |
 | **Long-term direction** | Trusted contacts, automatic device-to-device delivery, and opt-in folder sharing/sync |
-| **My focus** | Product direction, concept, brand identity, illustration, UX/UI, prototyping, and product documentation |
 | **Collaborator** | [Aaron Price](https://github.com/aaronprice00) — engineering partnership across the Go transfer layer and native macOS implementation |
 
 ## Why I started building LinkaBoo
