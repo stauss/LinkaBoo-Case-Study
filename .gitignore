@@ -49,3 +49,8 @@ DerivedData/
 # Node / Vercel
 node_modules/
 .vercel/
+
+# Local case-study working files and source archives
+/_CaseStudyAssets/
+/docs/_ProjectDocuments/
+/docs/portfolio/_Archived/
