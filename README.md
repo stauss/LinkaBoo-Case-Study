@@ -326,7 +326,7 @@ Deeper technical notes are available in [`docs/architecture.md`](docs/architectu
 
 LinkaBoo is led by **Caleb Stauss**, spanning the product idea, strategy, brand, illustration, UX/UI, interaction prototyping, and product direction.
 
-**Aaron Price** is credited as the project's engineering collaborator. Aaron helped turn the concept into a working application, contributing substantially to the Go transfer engine, Swift/AppKit integration, deep-link flow, progress and history work, and the technical systems that support the native experience.
+Aaron Price was an engineering collaborator on this project, working closely with me and contributing substantially to the Go transfer engine.
 
 The collaboration has been intentionally cross-disciplinary: product constraints shaped the architecture, implementation constraints reshaped the interface, and the character system evolved alongside real application states.
 
