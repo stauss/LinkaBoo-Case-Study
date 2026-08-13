@@ -167,7 +167,7 @@ Boo began as a way to make a technical utility feel approachable, but the charac
 
 The silhouette remains recognizable at menu bar scale. Expression, pose, and props then communicate state: idle, ready, carrying a file, transferring, attention required, and complete. This gives LinkaBoo a warmer voice without replacing familiar macOS conventions.
 
-![Latest LinkaBoo toolbar and Finder context-menu iconography board](<docs/portfolio/Iconography.png>)
+![Latest LinkaBoo toolbar and Finder context-menu iconography board](docs/portfolio/iconography.png)
 
 The visual system is deliberately compact:
 
