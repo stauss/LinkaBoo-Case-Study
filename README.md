@@ -143,11 +143,11 @@ Messaging evolved alongside the architecture. Early screens and motion studies u
 
 Generative image tools—including Midjourney explorations—were used to move quickly through visual directions before committing production design time. The work ranged from the Portal vortex and mid-century wordmark prompts to ghost-and-chain metaphors, paperclip forms, character sheets, facial expressions, arms, document props, status icons, office-document illustrations, and color palettes.
 
-![Latest LinkaBoo brand system showing the mascot and primary lockups](<docs/portfolio/Brand.png>)
 
-*The latest brand board brings the mascot, wordmark, and linka.boo URL treatment into one flexible identity system.*
+![Expanded Boo facial-expression system](<docs/portfolio/Midjourney-exploration.png>)
 
 The output was treated as a sketchbook, not a final asset pipeline. AI images were useful for answering directional questions:
+
 
 - should the identity feel technical, magical, or character-led?
 - can the mascot remain legible at menu bar size?
@@ -159,17 +159,15 @@ Selected ideas were then simplified, redrawn, tested at native UI sizes, and org
 
 ### Designing Boo as part of the interface
 
-![Boo character expression and silhouette exploration](docs/portfolio/character-exploration.png)
+![Expanded Boo facial-expression system](<docs/portfolio/Charecter Variations.png>)
 
 Boo began as a way to make a technical utility feel approachable, but the character became more useful when treated as interface language rather than decoration.
 
+![Expanded Boo facial-expression system](<docs/portfolio/Icon-in-the-toolbar.png>)
+
 The silhouette remains recognizable at menu bar scale. Expression, pose, and props then communicate state: idle, ready, carrying a file, transferring, attention required, and complete. This gives LinkaBoo a warmer voice without replacing familiar macOS conventions.
 
-![Expanded Boo facial-expression system](<docs/portfolio/Charecter Variations.png>)
-
-![Boo silhouette, arm, expression, and file-carrying variations](<docs/portfolio/Boo Charecter Variations.png>)
-
-*The character studies moved from broad facial exploration into a smaller set of poses that could communicate product state at native UI sizes.*
+![Latest LinkaBoo toolbar and Finder context-menu iconography board](<docs/portfolio/Iconography.png>)
 
 The visual system is deliberately compact:
 
@@ -179,9 +177,13 @@ The visual system is deliberately compact:
 - file and folder props explain the product without relying on paragraphs of copy
 - filled and outlined variants support toolbar, status, Finder, and contextual uses
 
-![LinkaBoo toolbar and Finder iconography explorations](docs/portfolio/iconography.png)
+character-exploration.png
 
-![Latest LinkaBoo toolbar and Finder context-menu iconography board](<docs/portfolio/Iconography.png>)
+![LinkaBoo toolbar and Finder iconography explorations](docs/portfolio/brand-system.png)
+
+![LinkaBoo toolbar and Finder iconography explorations](docs/portfolio/character-exploration.png)
+
+
 
 ## 7. Interaction design and prototyping
 
@@ -218,7 +220,6 @@ Boo notices the cursor, presents a document, accepts the drop, and carries the f
 
 ![Notch UI concepts for download, progress, link copied, and success states](docs/portfolio/notch-ui.png)
 
-![Latest notch and corner transfer-state explorations](<docs/portfolio/Notch UI Design.png>)
 
 Notch and corner treatments explored how active transfers could remain visible without interrupting the user’s work. Progress, link-copied, success, and error states were designed as a connected system rather than isolated notifications. The revised concepts compare the larger notch interaction with a compact corner “blip,” making the tradeoff between visibility and interruption explicit.
 
@@ -226,7 +227,6 @@ The prototype’s “Upload Documents” label reflects an earlier stage of the 
 
 ### Notification and motion studies
 
-![Notification illustration set for sharing files and folders](docs/portfolio/notification-illustrations.png)
 
 ![Latest notification illustration system for Boo, documents, and folders](<docs/portfolio/Notification Illustrations.png>)
 
