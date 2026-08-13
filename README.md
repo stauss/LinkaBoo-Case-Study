@@ -159,7 +159,7 @@ Selected ideas were then simplified, redrawn, tested at native UI sizes, and org
 
 ### Designing Boo as part of the interface
 
-![Expanded Boo facial-expression system](<docs/portfolio/Charecter Variations.png>)
+![Expanded Boo facial-expression system](<docs/portfolio/Charecter%20Variations.png>)
 
 Boo began as a way to make a technical utility feel approachable, but the character became more useful when treated as interface language rather than decoration.
 
