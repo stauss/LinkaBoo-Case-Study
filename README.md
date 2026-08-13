@@ -324,7 +324,7 @@ Deeper technical notes are available in [`docs/architecture.md`](docs/architectu
 
 ## Collaboration
 
-LinkaBoo is led by **Caleb Stauss**, spanning the product idea, strategy, brand, illustration, UX/UI, interaction prototyping, and product direction.
+LinkaBoo is led by Caleb Stauss, spanning the entire product cycle, from idea and strategy through brand, illustration, UX/UI, interaction prototyping, development, and technical architecture.
 
 Aaron Price was an engineering collaborator on this project, working closely with me and contributing substantially to the Go transfer engine.
 
