@@ -159,11 +159,9 @@ Selected ideas were then simplified, redrawn, tested at native UI sizes, and org
 
 ### Designing Boo as part of the interface
 
-![Expanded Boo facial-expression system](<docs/portfolio/Charecter%20Variations.png>)
+![Expanded Boo facial-expression system](<docs/portfolio/Icon-in-the-toolbar.png>)
 
 Boo began as a way to make a technical utility feel approachable, but the character became more useful when treated as interface language rather than decoration.
-
-![Expanded Boo facial-expression system](<docs/portfolio/Icon-in-the-toolbar.png>)
 
 The silhouette remains recognizable at menu bar scale. Expression, pose, and props then communicate state: idle, ready, carrying a file, transferring, attention required, and complete. This gives LinkaBoo a warmer voice without replacing familiar macOS conventions.
 
